@@ -210,6 +210,19 @@ if (!isset($_SESSION['user_id'])) {
 
         global $message;
 
+        // Hiển thị thông báo đặt hàng thành công cho guest
+        if (isset($_SESSION['order_success']) && $_SESSION['order_success'] === true) {
+            $success_msg = isset($_SESSION['order_success_message']) ? $_SESSION['order_success_message'] : 'Đặt hàng thành công!';
+            echo '
+       <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom: 0;">
+          <span style="font-size: 16px;"><i class="fas fa-check-circle"></i> ' . htmlspecialchars($success_msg) . '</span>
+          <i style="font-size: 20px; cursor: pointer" class="fas fa-times" onclick="this.parentElement.remove();"></i>
+       </div>';
+            // Xóa thông báo sau khi hiển thị
+            unset($_SESSION['order_success']);
+            unset($_SESSION['order_success_message']);
+        }
+
         if (isset($message) && is_array($message)) { // hiển thị thông báo sau khi thao tác với biến message được gán giá trị
             foreach ($message as $msg) {
                 echo '

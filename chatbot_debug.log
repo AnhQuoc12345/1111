@@ -1324,3 +1324,54 @@ CURL/HTTP ERROR at 2025-11-15T04:03:26+01:00: HTTP 404
     "curl_error": null
 }
 
+{
+    "time": "2025-11-28T04:08:39+01:00",
+    "userMessage": "tôi mua phụ kiện máy tính",
+    "request_data": {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [
+                    {
+                        "text": "tôi mua phụ kiện máy tính"
+                    }
+                ]
+            }
+        ]
+    },
+    "curl_ok": true,
+    "curl_http_code": 200,
+    "response_decoded": {
+        "candidates": [
+            {
+                "content": {
+                    "parts": [
+                        {
+                            "text": "Tuyệt vời! Phụ kiện máy tính rất đa dạng và có thể nâng cao trải nghiệm sử dụng của bạn rất nhiều.\n\nĐể tôi giúp bạn liệt kê một số loại phụ kiện phổ biến mà mọi người thường mua, tùy thuộc vào nhu cầu sử dụng của họ:\n\n**I. Phụ kiện thiết yếu (thường đi kèm nhưng có thể nâng cấp):**\n\n1.  **Bàn phím (Keyboard):**\n    *   **Bàn phím cơ (Mechanical Keyboard):** Độ bền cao, cảm giác gõ tốt, tùy chỉnh switch (clicky, tactile, linear). Phổ biến cho game thủ và người gõ nhiều.\n    *   **Bàn phím giả cơ\/màng (Membrane\/Mem-chanical Keyboard):** Êm ái hơn, giá thành rẻ hơn.\n    *   **Bàn phím không dây (Wireless Keyboard):** Tiện lợi, gọn gàng.\n    *   **Bàn phím công thái học (Ergonomic Keyboard):** Thiết kế giúp giảm mỏi tay khi gõ lâu.\n\n2.  **Chuột (Mouse):**\n    *   **Chuột có dây (Wired Mouse):** Độ trễ thấp, ổn định, không cần pin.\n    *   **Chuột không dây (Wireless Mouse):** Tiện lợi, di động.\n    *   **Chuột Gaming (Gaming Mouse):** DPI cao, nhiều nút tùy chỉnh, đèn LED, form cầm ôm tay.\n    *   **Chuột công thái học (Ergonomic Mouse\/Vertical Mouse):** Giúp giảm căng thẳng cổ tay.\n    *   **Trackball Mouse:** Dùng ngón tay di chuyển bi lăn thay vì cả con chuột.\n\n3.  **Màn hình (Monitor):**\n    *   **Kích thước & Độ phân giải:** Từ Full HD đến 4K, 5K.\n    *   **Tần số quét (Refresh Rate):** 60Hz, 75Hz, 120Hz, 144Hz, 240Hz (quan trọng cho game thủ).\n    *   **Tấm nền (Panel Type):** IPS (màu sắc đẹp), TN (tốc độ phản hồi nhanh), VA (độ tương phản cao).\n    *   **Màn hình cong (Curved Monitor):** Mang lại trải nghiệm đắm chìm hơn.\n\n**II. Phụ kiện âm thanh & hình ảnh:**\n\n1.  **Tai nghe (Headphones\/Headsets):**\n    *   **Tai nghe chụp tai (Over-ear):** Chất lượng âm thanh tốt, thoải mái, có dây hoặc không dây.\n    *   **Tai nghe gaming (Gaming Headset):** Tích hợp mic, âm thanh vòm, đèn LED.\n    *   **Tai nghe không dây (Wireless Headphones):** Bluetooth hoặc 2.4GHz.\n    *   **Tai nghe nhét tai (In-ear\/Earbuds):** Gọn nhẹ, tiện lợi.\n\n2.  **Loa (Speakers):**\n    *   **Loa 2.0\/2.1:** Phổ biến cho máy tính bàn (2 loa + 1 sub).\n    *   **Soundbar:** Dạng thanh, gọn gàng, chất lượng âm thanh tốt.\n\n3.  **Webcam:**\n    *   **Webcam HD\/Full HD\/4K:** Để gọi video, học online, livestream.\n\n4.  **Microphone:**\n    *   **Micro USB:** Cắm trực tiếp vào máy tính.\n    *   **Micro XLR:** Cần thêm sound card\/audio interface.\n    *   **Micro cài áo (Lavalier Mic):** Gọn nhẹ, tiện phỏng vấn\/thu âm cá nhân.\n\n**III. Phụ kiện lưu trữ & kết nối:**\n\n1.  **Ổ cứng di động (External Hard Drive - HDD\/SSD):**\n    *   **HDD di động:** Dung lượng lớn, giá thành rẻ hơn.\n    *   **SSD di động:** Tốc độ đọc\/ghi siêu nhanh, bền hơn, nhỏ gọn.\n\n2.  **USB Flash Drive (USB):** Lưu trữ và truyền tải dữ liệu nhanh chóng.\n\n3.  **Đầu đọc thẻ nhớ (Card Reader):** Đọc thẻ SD, MicroSD từ máy ảnh, điện thoại.\n\n4.  **USB Hub\/Docking Station:** Mở rộng cổng kết nối cho máy tính (USB, HDMI, Ethernet...).\n\n5.  **Cáp kết nối:**\n    *   **Cáp HDMI\/DisplayPort:** Kết nối màn hình.\n    *   **Cáp USB-C, USB 3.0, Micro USB:** Sạc, truyền dữ liệu.\n    *   **Cáp Ethernet (LAN):** Kết nối mạng dây.\n\n6.  **Bộ chuyển đổi Wi-Fi\/Bluetooth (USB Wi-Fi\/Bluetooth Adapter):** Thêm khả năng kết nối không dây cho máy tính không có sẵn.\n\n**IV. Phụ kiện tiện ích & bảo vệ:**\n\n1.  **Lót chuột\/Bàn di chuột (Mouse Pad\/Desk Mat):** Giúp di chuột mượt mà, bảo vệ mặt bàn, tạo không gian làm việc đẹp.\n\n2.  **Giá đỡ màn hình\/tay treo màn hình (Monitor Arm\/Stand):** Điều chỉnh độ cao, góc nhìn, tiết kiệm không gian bàn.\n\n3.  **Kệ\/đế tản nhiệt Laptop (Laptop Stand\/Cooling Pad):** Nâng cao laptop, cải thiện tản nhiệt, giúp làm việc công thái học hơn.\n\n4.  **Bộ lưu điện UPS (Uninterruptible Power Supply):** Bảo vệ máy tính khỏi mất điện đột ngột và dao động điện áp.\n\n5.  **Ổ cắm chống sét lan truyền (Surge Protector):** Bảo vệ thiết bị điện tử khỏi sốc điện.\n\n6.  **Bộ dụng cụ vệ sinh máy tính (Cleaning Kit):** Khăn lau màn hình, bình xịt khí nén, cọ vệ sinh bàn phím.\n\n7.  **Dây buộc\/quản lý cáp (Cable Management):** Giúp bàn làm việc gọn gàng hơn.\n\nBạn đã mua những phụ kiện nào rồi? Hay bạn đang tìm kiếm loại phụ kiện cụ thể nào không? Hãy cho tôi biết nhé!"
+                        }
+                    ],
+                    "role": "model"
+                },
+                "finishReason": "STOP",
+                "index": 0
+            }
+        ],
+        "usageMetadata": {
+            "promptTokenCount": 8,
+            "candidatesTokenCount": 1365,
+            "totalTokenCount": 2610,
+            "promptTokensDetails": [
+                {
+                    "modality": "TEXT",
+                    "tokenCount": 8
+                }
+            ],
+            "thoughtsTokenCount": 1237
+        },
+        "modelVersion": "gemini-2.5-flash",
+        "responseId": "NxIpaZGbDMKC0-kP9ITZ4QQ"
+    },
+    "raw_response": "{\n  \"candidates\": [\n    {\n      \"content\": {\n        \"parts\": [\n          {\n            \"text\": \"Tuyệt vời! Phụ kiện máy tính rất đa dạng và có thể nâng cao trải nghiệm sử dụng của bạn rất nhiều.\\n\\nĐể tôi giúp bạn liệt kê một số loại phụ kiện phổ biến mà mọi người thường mua, tùy thuộc vào nhu cầu sử dụng của họ:\\n\\n**I. Phụ kiện thiết yếu (thường đi kèm nhưng có thể nâng cấp):**\\n\\n1.  **Bàn phím (Keyboard):**\\n    *   **Bàn phím cơ (Mechanical Keyboard):** Độ bền cao, cảm giác gõ tốt, tùy chỉnh switch (clicky, tactile, linear). Phổ biến cho game thủ và người gõ nhiều.\\n    *   **Bàn phím giả cơ\/màng (Membrane\/Mem-chanical Keyboard):** Êm ái hơn, giá thành rẻ hơn.\\n    *   **Bàn phím không dây (Wireless Keyboard):** Tiện lợi, gọn gàng.\\n    *   **Bàn phím công thái học (Ergonomic Keyboard):** Thiết kế giúp giảm mỏi tay khi gõ lâu.\\n\\n2.  **Chuột (Mouse):**\\n    *   **Chuột có dây (Wired Mouse):** Độ trễ thấp, ổn định, không cần pin.\\n    *   **Chuột không dây (Wireless Mouse):** Tiện lợi, di động.\\n    *   **Chuột Gaming (Gaming Mouse):** DPI cao, nhiều nút tùy chỉnh, đèn LED, form cầm ôm tay.\\n    *   **Chuột công thái học (Ergonomic Mouse\/Vertical Mouse):** Giúp giảm căng thẳng cổ tay.\\n    *   **Trackball Mouse:** Dùng ngón tay di chuyển bi lăn thay vì cả con chuột.\\n\\n3.  **Màn hình (Monitor):**\\n    *   **Kích thước & Độ phân giải:** Từ Full HD đến 4K, 5K.\\n    *   **Tần số quét (Refresh Rate):** 60Hz, 75Hz, 120Hz, 144Hz, 240Hz (quan trọng cho game thủ).\\n    *   **Tấm nền (Panel Type):** IPS (màu sắc đẹp), TN (tốc độ phản hồi nhanh), VA (độ tương phản cao).\\n    *   **Màn hình cong (Curved Monitor):** Mang lại trải nghiệm đắm chìm hơn.\\n\\n**II. Phụ kiện âm thanh & hình ảnh:**\\n\\n1.  **Tai nghe (Headphones\/Headsets):**\\n    *   **Tai nghe chụp tai (Over-ear):** Chất lượng âm thanh tốt, thoải mái, có dây hoặc không dây.\\n    *   **Tai nghe gaming (Gaming Headset):** Tích hợp mic, âm thanh vòm, đèn LED.\\n    *   **Tai nghe không dây (Wireless Headphones):** Bluetooth hoặc 2.4GHz.\\n    *   **Tai nghe nhét tai (In-ear\/Earbuds):** Gọn nhẹ, tiện lợi.\\n\\n2.  **Loa (Speakers):**\\n    *   **Loa 2.0\/2.1:** Phổ biến cho máy tính bàn (2 loa + 1 sub).\\n    *   **Soundbar:** Dạng thanh, gọn gàng, chất lượng âm thanh tốt.\\n\\n3.  **Webcam:**\\n    *   **Webcam HD\/Full HD\/4K:** Để gọi video, học online, livestream.\\n\\n4.  **Microphone:**\\n    *   **Micro USB:** Cắm trực tiếp vào máy tính.\\n    *   **Micro XLR:** Cần thêm sound card\/audio interface.\\n    *   **Micro cài áo (Lavalier Mic):** Gọn nhẹ, tiện phỏng vấn\/thu âm cá nhân.\\n\\n**III. Phụ kiện lưu trữ & kết nối:**\\n\\n1.  **Ổ cứng di động (External Hard Drive - HDD\/SSD):**\\n    *   **HDD di động:** Dung lượng lớn, giá thành rẻ hơn.\\n    *   **SSD di động:** Tốc độ đọc\/ghi siêu nhanh, bền hơn, nhỏ gọn.\\n\\n2.  **USB Flash Drive (USB):** Lưu trữ và truyền tải dữ liệu nhanh chóng.\\n\\n3.  **Đầu đọc thẻ nhớ (Card Reader):** Đọc thẻ SD, MicroSD từ máy ảnh, điện thoại.\\n\\n4.  **USB Hub\/Docking Station:** Mở rộng cổng kết nối cho máy tính (USB, HDMI, Ethernet...).\\n\\n5.  **Cáp kết nối:**\\n    *   **Cáp HDMI\/DisplayPort:** Kết nối màn hình.\\n    *   **Cáp USB-C, USB 3.0, Micro USB:** Sạc, truyền dữ liệu.\\n    *   **Cáp Ethernet (LAN):** Kết nối mạng dây.\\n\\n6.  **Bộ chuyển đổi Wi-Fi\/Bluetooth (USB Wi-Fi\/Bluetooth Adapter):** Thêm khả năng kết nối không dây cho máy tính không có sẵn.\\n\\n**IV. Phụ kiện tiện ích & bảo vệ:**\\n\\n1.  **Lót chuột\/Bàn di chuột (Mouse Pad\/Desk Mat):** Giúp di chuột mượt mà, bảo vệ mặt bàn, tạo không gian làm việc đẹp.\\n\\n2.  **Giá đỡ màn hình\/tay treo màn hình (Monitor Arm\/Stand):** Điều chỉnh độ cao, góc nhìn, tiết kiệm không gian bàn.\\n\\n3.  **Kệ\/đế tản nhiệt Laptop (Laptop Stand\/Cooling Pad):** Nâng cao laptop, cải thiện tản nhiệt, giúp làm việc công thái học hơn.\\n\\n4.  **Bộ lưu điện UPS (Uninterruptible Power Supply):** Bảo vệ máy tính khỏi mất điện đột ngột và dao động điện áp.\\n\\n5.  **Ổ cắm chống sét lan truyền (Surge Protector):** Bảo vệ thiết bị điện tử khỏi sốc điện.\\n\\n6.  **Bộ dụng cụ vệ sinh máy tính (Cleaning Kit):** Khăn lau màn hình, bình xịt khí nén, cọ vệ sinh bàn phím.\\n\\n7.  **Dây buộc\/quản lý cáp (Cable Management):** Giúp bàn làm việc gọn gàng hơn.\\n\\nBạn đã mua những phụ kiện nào rồi? Hay bạn đang tìm kiếm loại phụ kiện cụ thể nào không? Hãy cho tôi biết nhé!\"\n          }\n        ],\n        \"role\": \"model\"\n      },\n      \"finishReason\": \"STOP\",\n      \"index\": 0\n    }\n  ],\n  \"usageMetadata\": {\n    \"promptTokenCount\": 8,\n    \"candidatesTokenCount\": 1365,\n    \"totalTokenCount\": 2610,\n    \"promptTokensDetails\": [\n      {\n        \"modality\": \"TEXT\",\n        \"tokenCount\": 8\n      }\n    ],\n    \"thoughtsTokenCount\": 1237\n  },\n  \"modelVersion\": \"gemini-2.5-flash\",\n  \"responseId\": \"NxIpaZGbDMKC0-kP9ITZ4QQ\"\n}\n",
+    "curl_error": null
+}
+

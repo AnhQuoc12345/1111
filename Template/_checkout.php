@@ -132,19 +132,16 @@ if (!empty($provincesData)) {
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email">
             </div>
             <div class="form-group">
-                <label for="phone">Số điện thoại</label>
+                <label for="phone">Số điện thoại <span class="text-danger">*</span></label>
                 <input 
                     type="tel" 
                     name="phone" 
                     id="phone" 
                     required 
-                    maxlength="11" 
-                    minlength="10"
-                    pattern="[0-9]{10,11}"
-                    title="Số điện thoại phải có 10 hoặc 11 chữ số."
+                    placeholder="Nhập số điện thoại (10-11 chữ số)"
                 >
             </div>
             
@@ -190,9 +187,12 @@ if (!empty($provincesData)) {
             </div>
             
             <?php if (!empty($displayCartItems)): ?>
-                <button type="submit" name="checkout" class="btn btn-primary">Đặt Hàng</button>
+                <button type="submit" name="checkout" class="btn btn-primary btn-lg" style="width: 100%; padding: 15px; font-size: 1.2rem; margin-top: 20px;">Đặt Hàng</button>
             <?php else: ?>
-                <button type="button" class="btn btn-secondary" disabled>Giỏ hàng trống</button>
+                <div class="alert alert-warning">
+                    <p>Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm vào giỏ hàng trước khi đặt hàng.</p>
+                    <a href="index.php" class="btn btn-primary">Quay lại trang chủ</a>
+                </div>
             <?php endif; ?>
         </form>
     </div>
@@ -282,5 +282,64 @@ if (!empty($provincesData)) {
                 methodSelect.value = 'COD';
             }
         });
+
+        // Xử lý form submit
+        var checkoutForm = document.querySelector('.checkout-form');
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', function(e) {
+                // Kiểm tra giỏ hàng
+                var cartItems = <?php echo json_encode($displayCartItems); ?>;
+                if (!cartItems || cartItems.length === 0) {
+                    e.preventDefault();
+                    alert('Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm vào giỏ hàng trước khi đặt hàng.');
+                    return false;
+                }
+
+                // Kiểm tra các trường bắt buộc
+                var name = document.getElementById('name').value.trim();
+                var phone = document.getElementById('phone').value.trim();
+                var address = document.getElementById('address').value.trim();
+                var city = document.getElementById('city').value;
+                var ward = document.getElementById('ward').value;
+
+                if (!name) {
+                    e.preventDefault();
+                    alert('Vui lòng nhập họ và tên.');
+                    document.getElementById('name').focus();
+                    return false;
+                }
+
+                if (!phone) {
+                    e.preventDefault();
+                    alert('Vui lòng nhập số điện thoại.');
+                    document.getElementById('phone').focus();
+                    return false;
+                }
+
+                if (!address) {
+                    e.preventDefault();
+                    alert('Vui lòng nhập địa chỉ chi tiết.');
+                    document.getElementById('address').focus();
+                    return false;
+                }
+
+                if (!city) {
+                    e.preventDefault();
+                    alert('Vui lòng chọn tỉnh/thành phố.');
+                    document.getElementById('city').focus();
+                    return false;
+                }
+
+                if (!ward) {
+                    e.preventDefault();
+                    alert('Vui lòng chọn xã/phường.');
+                    document.getElementById('ward').focus();
+                    return false;
+                }
+
+                // Nếu tất cả đều hợp lệ, cho phép submit
+                return true;
+            });
+        }
     });
 </script>
