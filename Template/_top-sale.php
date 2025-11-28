@@ -1,16 +1,11 @@
 <!-- Top Sale -->
 <?php
-$user_id = @$_SESSION['user_id'] ?? 1;
+$user_id = @$_SESSION['user_id'] ?? (isset($_SESSION['guest_id']) ? $_SESSION['guest_id'] : 1);
     // Thêm vào giỏ
    if($_SERVER['REQUEST_METHOD'] == "POST"){
     if (isset($_POST['top_sale_submit'])){
-
-        if ($user_id == 1) {
-            header('Location: login.php');
-        } else {
-            // call method addToCart
-            $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
-        }
+        // Cho phép thêm vào giỏ hàng mà không cần đăng nhập
+        $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
     }
 }
     $select_product =  mysqli_query($conn, "SELECT * FROM `products` limit 10") or die('Query failed');
@@ -31,13 +26,6 @@ $user_id = @$_SESSION['user_id'] ?? 1;
                     </a>
                     <div class="text-center">
                         <h6 style="height: 39px;"><?php echo  $item['item_name'] ?? "Unknown";  ?></h6>
-                        <!-- <div class="rating text-warning font-size-12">
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="far fa-star"></i></span>
-                        </div> -->
                         <div class="price py-2">
                             <span>
                                 <?php echo number_format($item['item_price'], 0, ',', '.'); ?> đ
@@ -47,7 +35,7 @@ $user_id = @$_SESSION['user_id'] ?? 1;
                             <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
                             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                             <?php
-                            if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
+                            if (in_array($item['item_id'], $Cart->getCartId($product->getCartData($user_id)) ?? [])){
                                 echo '<button type="submit" disabled class="btn btn-success font-size-12">Đã có trong giỏ</button>';
                             }else{
                                 echo '<button type="submit" name="top_sale_submit" class="btn btn-warning font-size-12">Thêm vào giỏ</button>';

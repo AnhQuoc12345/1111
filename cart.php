@@ -1,4 +1,5 @@
 <?php
+
 ob_start();
 session_start();
 
@@ -28,8 +29,11 @@ if (!isset($Cart)){
 <?php
 
     /* include cart items if it is not empty */
+    // Lấy user_id từ header.php
+    $user_id = @$_SESSION['user_id'] ?? (isset($_SESSION['guest_id']) ? $_SESSION['guest_id'] : 1);
     // Bây giờ $product đã tồn tại và sẽ chạy đúng
-    count($product->getData('cart')) ? include ('Template/_cart-template.php') :  include ('Template/notFound/_cart_notFound.php');
+    $cartData = $product->getCartData($user_id);
+    count($cartData) ? include ('Template/_cart-template.php') :  include ('Template/notFound/_cart_notFound.php');
     
 ?>
 

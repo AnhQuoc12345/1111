@@ -1,3 +1,5 @@
+
+
 <?php
 
 class DBController
@@ -9,6 +11,7 @@ class DBController
     protected $database = "webbanlinhkien";
     // connection property
     public $con = null;
+
     // call constructor
     public function __construct()
     {
@@ -17,10 +20,12 @@ class DBController
             echo "Fail " . $this->con->connect_error;
         }
     }
+    
     public function __destruct()
     {
         $this->closeConnection();
     }
+    
     // for mysqli closing connection
     protected function closeConnection(){
         if ($this->con != null ){
@@ -29,3 +34,4 @@ class DBController
         }
     }
 }
+// KHÔNG CÓ THẺ ĐÓNG ?>

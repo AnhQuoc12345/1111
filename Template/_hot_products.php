@@ -1,15 +1,12 @@
 <?php
 // === PHẦN LOGIC THÊM GIỎ HÀNG NÀY ĐƯỢC GIỮ NGUYÊN ===
-$user_id = $_SESSION['user_id'] ?? 1;
+$user_id = @$_SESSION['user_id'] ?? (isset($_SESSION['guest_id']) ? $_SESSION['guest_id'] : 1);
 
 // Thêm vào giỏ
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     if (isset($_POST['hot_product_submit'])){ 
-        if ($user_id == 1) {
-            header('Location: login.php');
-        } else {
-            $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
-        }
+        // Cho phép thêm vào giỏ hàng mà không cần đăng nhập
+        $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
     }
 }
 
@@ -58,7 +55,7 @@ $hotProducts = mysqli_fetch_all($hot_product_query, MYSQLI_ASSOC);
                                 <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
                                 <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
                                 <?php
-                                if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
+                                if (in_array($item['item_id'], $Cart->getCartId($product->getCartData($user_id)) ?? [])){
                                     echo '<button type="submit" disabled class="btn btn-success font-size-12">Đã có trong giỏ</button>';
                                 }else{
                                     echo '<button type="submit" name="hot_product_submit" class="btn btn-warning font-size-12">Thêm vào giỏ</button>';

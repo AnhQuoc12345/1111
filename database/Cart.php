@@ -31,7 +31,14 @@ class Cart
     }
 
     public function deleteAllCart($user_id = null){
-        if ($this->db->con != null){
+        // Nếu là guest, xóa từ session
+        if ($user_id != null && $user_id < 0) {
+            $_SESSION['guest_cart'] = array();
+            return true;
+        }
+        
+        // Nếu đã đăng nhập, xóa từ database
+        if ($this->db->con != null && $user_id != null){
             $result = $this->db->con->query("DELETE FROM cart WHERE user_id={$user_id}");
             return $result;
         }
@@ -40,6 +47,37 @@ class Cart
     // to get user_id and item_id and insert into cart table
     public function addToCart($userid, $itemid){
         if (isset($userid) && isset($itemid)){
+            // Kiểm tra nếu là guest (user_id < 0), lưu vào session
+            if ($userid < 0) {
+                // Khởi tạo session cart nếu chưa có
+                if (!isset($_SESSION['guest_cart'])) {
+                    $_SESSION['guest_cart'] = array();
+                }
+                
+                // Kiểm tra xem sản phẩm đã có trong giỏ session chưa
+                $found = false;
+                foreach ($_SESSION['guest_cart'] as &$item) {
+                    if ($item['item_id'] == $itemid) {
+                        $item['quantity'] += 1;
+                        $found = true;
+                        break;
+                    }
+                }
+                
+                // Nếu chưa có, thêm mới
+                if (!$found) {
+                    $_SESSION['guest_cart'][] = array(
+                        'item_id' => $itemid,
+                        'quantity' => 1
+                    );
+                }
+                
+                // Reload Page
+                header("Location: " . $_SERVER['PHP_SELF']);
+                return;
+            }
+            
+            // Nếu đã đăng nhập, lưu vào database
             // Kiểm tra xem sản phẩm đã có trong giỏ hay chưa
             $checkCart = mysqli_query($this->db->con, "SELECT * FROM cart WHERE user_id = {$userid} AND item_id = {$itemid}");
             
@@ -69,9 +107,23 @@ class Cart
     }
     
     // delete cart item using cart item id
-    public function deleteCart($item_id = null, $table = 'cart'){
-        if($item_id != null){
-            $result = $this->db->con->query("DELETE FROM {$table} WHERE item_id={$item_id}");
+    public function deleteCart($item_id = null, $user_id = null, $table = 'cart'){
+        if($item_id != null && $user_id != null){
+            // Nếu là guest, xóa từ session
+            if ($user_id < 0) {
+                if (isset($_SESSION['guest_cart'])) {
+                    $_SESSION['guest_cart'] = array_filter($_SESSION['guest_cart'], function($item) use ($item_id) {
+                        return $item['item_id'] != $item_id;
+                    });
+                    // Reset array keys
+                    $_SESSION['guest_cart'] = array_values($_SESSION['guest_cart']);
+                }
+                header("Location:" . $_SERVER['PHP_SELF']);
+                return true;
+            }
+            
+            // Nếu đã đăng nhập, xóa từ database
+            $result = $this->db->con->query("DELETE FROM {$table} WHERE item_id={$item_id} AND user_id={$user_id}");
             if($result){
                 header("Location:" . $_SERVER['PHP_SELF']);
             }
@@ -131,12 +183,28 @@ class Cart
         }
     }
 
-    public function updateQuantity($item_id, $quantity) {
-        // Update quantity for the given item ID
-        $query = "UPDATE cart SET quantity = ? WHERE item_id = ?";
-        $stmt = $this->db->con->prepare($query);
-        $stmt->bind_param("ii", $quantity, $item_id);
-        $stmt->execute();
+    public function updateQuantity($item_id, $quantity, $user_id = null) {
+        // Update quantity for the given item ID and user ID
+        if ($user_id != null) {
+            // Nếu là guest, cập nhật trong session
+            if ($user_id < 0) {
+                if (isset($_SESSION['guest_cart'])) {
+                    foreach ($_SESSION['guest_cart'] as &$item) {
+                        if ($item['item_id'] == $item_id) {
+                            $item['quantity'] = $quantity;
+                            break;
+                        }
+                    }
+                }
+                return true;
+            }
+            
+            // Nếu đã đăng nhập, cập nhật trong database
+            $query = "UPDATE cart SET quantity = ? WHERE item_id = ? AND user_id = ?";
+            $stmt = $this->db->con->prepare($query);
+            $stmt->bind_param("iii", $quantity, $item_id, $user_id);
+            $stmt->execute();
+        }
     }
 
 

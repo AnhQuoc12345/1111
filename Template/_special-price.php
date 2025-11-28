@@ -5,17 +5,13 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$user_id = $_SESSION['user_id'] ?? 1;
+$user_id = @$_SESSION['user_id'] ?? (isset($_SESSION['guest_id']) ? $_SESSION['guest_id'] : 1);
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     // PHP này kiểm tra 'special_price_submit'
     if (isset($_POST['special_price_submit'])){
-        if ($user_id == 1) {
-            header('Location: login.php');
-        } else {
-            // call method addToCart
-            $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
-        }
+        // Cho phép thêm vào giỏ hàng mà không cần đăng nhập
+        $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
     }
 }
 
@@ -86,7 +82,7 @@ if (isset($_SESSION['special_products']) &&
                             <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
                             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                             <?php
-                            if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
+                            if (in_array($item['item_id'], $Cart->getCartId($product->getCartData($user_id)) ?? [])){
                                 echo '<button type="submit" disabled class="btn btn-success font-size-12">Đã có trong giỏ</button>';
                             }else{
                                 echo '<button type="submit" name="special_price_submit" class="btn btn-warning font-size-12">Thêm vào giỏ</button>';

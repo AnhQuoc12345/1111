@@ -6,7 +6,7 @@ session_start();
 include ('header.php');
 include './database/DBController.php';
 
-$user_id = $_SESSION['user_id'] ?? 1;
+$user_id = @$_SESSION['user_id'] ?? (isset($_SESSION['guest_id']) ? $_SESSION['guest_id'] : 1);
 $cate_id = isset($_GET['cate_id']) ? (int)$_GET['cate_id'] : 0;
 
 $category_query = mysqli_query($conn, "SELECT * FROM `categories` WHERE id = $cate_id") or die('Query failed');
@@ -63,7 +63,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
                             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                             <?php
-                            if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
+                            if (in_array($item['item_id'], $Cart->getCartId($product->getCartData($user_id)) ?? [])){
                                 echo '<button type="submit" disabled class="btn btn-success font-size-12">Đã có trong giỏ</button>';
                             }else{
                                 echo '<button type="submit" name="category_submit" class="btn btn-warning font-size-12">Thêm vào giỏ</button>';

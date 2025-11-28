@@ -5,14 +5,14 @@
 // echo "<hr>";
 // // --- KẾT THÚC THÊM ---
 
-$user_id = $_SESSION['user_id'] ?? 1;
+$user_id = @$_SESSION['user_id'] ?? (isset($_SESSION['guest_id']) ? $_SESSION['guest_id'] : 1);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // ... (Toàn bộ code POST của bạn giữ nguyên, tôi ẩn đi cho gọn) ...
     if (isset($_POST['delete-cart-submit'])) {
-        $deletedrecord = $Cart->deleteCart($_POST['item_id']);
+        $deletedrecord = $Cart->deleteCart($_POST['item_id'], $user_id);
     }
     if (isset($_POST['update-quantity'])) {
-        $updatedQuantity = $Cart->updateQuantity($_POST['item_id'], $_POST['quantity']);
+        $updatedQuantity = $Cart->updateQuantity($_POST['item_id'], $_POST['quantity'], $user_id);
     }
     if (isset($_POST['delete-all-cart'])) {
         $Cart->deleteAllCart($user_id);
@@ -21,12 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $Cart->saveForLater($_POST['item_id']);
     }
     if (isset($_POST['go-buy'])) {
-        if (isset($_SESSION['user_id'])) {
-            header('Location: checkout.php');
-        } else {
-            $message[] = 'Vui lòng đăng nhập để mua hàng.';
-            header('Location: login.php');
-        }
+        // Cho phép cả user đã đăng nhập và khách vãng lai vào checkout
+        header('Location: checkout.php');
     }
 }
 

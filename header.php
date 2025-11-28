@@ -1,5 +1,25 @@
 <?php
-$user_id = @$_SESSION['user_id'] ?? 1;  
+// Đảm bảo session đã được khởi động
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Tạo guest_id cho khách hàng chưa đăng nhập
+if (!isset($_SESSION['user_id'])) {
+    // Tạo guest_id dựa trên session_id (hash để tạo số nguyên)
+    if (!isset($_SESSION['guest_id'])) {
+        // Tạo guest_id từ hash của session_id, chuyển thành số nguyên âm
+        $session_hash = crc32(session_id());
+        $_SESSION['guest_id'] = -abs($session_hash); // Sử dụng số âm để tránh xung đột với user_id thật
+    }
+    $user_id = $_SESSION['guest_id'];
+} else {
+    $user_id = $_SESSION['user_id'];
+    // Xóa guest_id nếu đã đăng nhập
+    if (isset($_SESSION['guest_id'])) {
+        unset($_SESSION['guest_id']);
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -202,14 +222,14 @@ $user_id = @$_SESSION['user_id'] ?? 1;
         ?>
         <div class="strip d-flex justify-content-between px-4 py-1 bg-light">
             <p class="font-rale font-size-12 text-black-50 m-0"></p>
-            <?php if ($user_id && $user_id != 1) { ?>
+            <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) { ?>
                 <div class="user-dropdown" style="position: relative; display: inline-block;">
                     <i class="fas fa-user-circle" style="font-size: 30px; cursor: pointer;" id="userIcon"></i>
                     <!-- Dropdown menu -->
                     <div id="userDropdown"
                         style="display: none; position: absolute; top: 30px; right: 0; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 1000; min-width: 150px;">
                         <p class="font-rale font-size-12 text-black-50 m-0 p-3">Xin chào,
-                            <?php echo $_SESSION['user_name']; ?></p>
+                            <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Người dùng'; ?></p>
                         <a href="./logout.php" class="btn btn-danger btn-sm w-fit">Đăng xuất</a>
                     </div>
                 </div>
@@ -248,9 +268,6 @@ $user_id = @$_SESSION['user_id'] ?? 1;
                                 <?php endforeach; ?>
                             </div>
                         </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="./blog.php">Blog</a>
-                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="./order.php">Đơn hàng</a>
                     </li>
@@ -360,24 +377,21 @@ document.addEventListener('DOMContentLoaded', function() {
         chatInput.value = '';
 
         // 2. Gửi tin nhắn đến backend (chatbot_api.php)
-        fetch('chatbot_api.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: messageText })
-        })
-        .then(response => response.json())
-        .then(data => {
-            // 3. Nhận và hiển thị tin nhắn của AI
-            // Dùng .innerHTML để AI có thể xuống dòng (thay \n bằng <br>)
-            const formattedReply = data.reply.replace(/\n/g, '<br>');
-            appendMessage(formattedReply, 'ai', true); // true = là HTML
-        })
-        .catch(error => {
-            console.error('Lỗi Fetch:', error);
-            appendMessage('Xin lỗi, tôi đang gặp sự cố. Vui lòng thử lại sau.', 'ai');
-        });
+       fetch('chatbot_api.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: messageText })
+})
+.then(response => response.text()) // dùng text thay vì json
+.then(text => {
+    console.log('Backend trả:', text);
+    const data = JSON.parse(text); // parse sau khi chắc chắn text là JSON
+    appendMessage(data.reply.replace(/\n/g,'<br>'),'ai',true);
+})
+.catch(err => {
+    console.error('Lỗi fetch:', err);
+});
+
     }
 
     // Hàm để thêm tin nhắn vào cửa sổ chat

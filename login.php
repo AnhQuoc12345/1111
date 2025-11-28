@@ -25,12 +25,12 @@ if (isset($_POST['submit'])) {
         if (password_verify($password_input, $user['password'])) {
             
             // 🛑 BƯỚC QUAN TRỌNG: HỦY VÀ KHỞI ĐỘNG LẠI SESSION CŨ
-            session_unset();
-            session_destroy();
-            // Khởi động lại session để lưu thông tin người dùng mới
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
+            // session_unset();
+            // session_destroy();
+            // // Khởi động lại session để lưu thông tin người dùng mới
+            // if (session_status() == PHP_SESSION_NONE) {
+            //     session_start();
+            // }
             
             if ($user['status'] == 0) {
                 $message[] = 'Tài khoản của bạn đã bị khóa!';
@@ -55,6 +55,25 @@ if (isset($_POST['submit'])) {
                     }
 
                 } elseif ($user['role'] == 'user') {
+                    
+                    // LƯU GIỎ HÀNG KHÁCH VÃNG LAI VÀO BACKUP TRƯỚC KHI ĐĂNG NHẬP
+                    // Để khôi phục lại khi đăng xuất
+                    if (isset($_SESSION['guest_cart']) && !empty($_SESSION['guest_cart'])) {
+                        $_SESSION['guest_cart_backup'] = $_SESSION['guest_cart'];
+                    }
+                    
+                    // Lưu guest_id vào backup
+                    if (isset($_SESSION['guest_id'])) {
+                        $_SESSION['guest_id_backup'] = $_SESSION['guest_id'];
+                    }
+                    
+                    // Xóa giỏ hàng guest khỏi session (nhưng giữ trong backup)
+                    if (isset($_SESSION['guest_cart'])) {
+                        unset($_SESSION['guest_cart']);
+                    }
+                    if (isset($_SESSION['guest_id'])) {
+                        unset($_SESSION['guest_id']);
+                    }
                     
                     // KHÁCH HÀNG THÔNG THƯỜNG
                     $_SESSION['user_id'] = $user['user_id'];
